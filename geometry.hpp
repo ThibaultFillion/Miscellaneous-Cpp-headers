@@ -90,11 +90,11 @@ Vec3 operator * (double s, const Vec3 & v){return Vec3(v.x*s, v.y*s, v.z*s);}
 Vec3 operator / (const Vec3 & v, double s){return Vec3(v.x/s, v.y/s, v.z/s);}
 
 double get_angle(const Vec3 & a, const Vec3 & b){
-	return acos(a.dot(b)/(a.norm() + b.norm()));
+	return acos(a.dot(b)/(a.norm() * b.norm()));
 	}
 
 double get_angle(const Vec2 & a, const Vec2 & b){
-	return acos(a.dot(b)/(a.norm() + b.norm()));
+	return acos(a.dot(b)/(a.norm() * b.norm()));
 	}
 
 double get_distance(const Vec2 & a, const Vec2 & b){
@@ -114,5 +114,6 @@ Vec3 rotate_around_axis(Vec3 & v, Vec3 & o, Vec3 & u, double angle){
 	Vec3 v2 = o + (v-o) + sin(angle) * (u.cross(v-o)) + (1. -cos(angle))*(u.cross(u.cross(v-o)));
 	return v2;
 	}
+
 
 #endif // GEOMETRY_HPP
