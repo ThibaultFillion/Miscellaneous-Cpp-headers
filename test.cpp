@@ -102,7 +102,11 @@ void test_vec3(){
 	//angle
 	v = Vec3(1, 0, 0);
 	w = Vec3(0, 1, 0);
-	assert(get_angle(v, w)==M_PI/2);
+	assert(fabs(get_angle(v, w) - M_PI/2)<1e-10);
+	
+	v = Vec3(1, 0, 0);
+	w = Vec3(1, 1, 0);
+	assert(fabs(get_angle(v, w) - M_PI/4)<1e-10);
 	}
 
 void test(){
@@ -113,4 +117,5 @@ void test(){
 int main(){
 	test();
 	return 0;
+
 	}
