@@ -115,5 +115,5 @@ Vec3 rotate_around_axis(Vec3 & v, Vec3 & o, Vec3 & u, double angle){
 	return v2;
 	}
 
-
 #endif // GEOMETRY_HPP
+
