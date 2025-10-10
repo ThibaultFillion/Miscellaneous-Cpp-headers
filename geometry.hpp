@@ -51,6 +51,8 @@ class Vec2{
 	Vec2 & normalize(){double n = norm(); x/=n; y/=n; return *this;}
 	};
 
+Vec2 operator + (const Vec2 & v){return v;}
+Vec2 operator - (const Vec2 & v){return Vec2(-v.x, -v.y);}
 Vec2 operator + (const Vec2 & a, const Vec2 & b){return Vec2(a.x+b.x, a.y+b.y);}
 Vec2 operator - (const Vec2 & a, const Vec2 & b){return Vec2(a.x-b.x, a.y-b.y);}
 Vec2 operator * (const Vec2 & v, double s){return Vec2(v.x*s, v.y*s);}
@@ -83,6 +85,8 @@ class Vec3{
 	Vec3 & normalize(){double n = norm(); x/=n; y/=n; z/=n; return *this;}
 	};
 
+Vec3 operator + (const Vec3 & v){return v;}
+Vec3 operator - (const Vec3 & v){return Vec3(-v.x, -v.y, -v.z);}
 Vec3 operator + (const Vec3 & a, const Vec3 & b){return Vec3(a.x+b.x, a.y+b.y, a.z+b.z);}
 Vec3 operator - (const Vec3 & a, const Vec3 & b){return Vec3(a.x-b.x, a.y-b.y, a.z-b.z);}
 Vec3 operator * (const Vec3 & v, double s){return Vec3(v.x*s, v.y*s, v.z*s);}
@@ -116,4 +120,5 @@ Vec3 rotate_around_axis(Vec3 & v, Vec3 & o, Vec3 & u, double angle){
 	}
 
 #endif // GEOMETRY_HPP
+
 
