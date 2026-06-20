@@ -21,13 +21,17 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 =====================================================================================
 
 Very simple header only include for some basic geometry classes and functions.
+
 classes:
-Vec2: two dimensions vector class
-Vec3: three dimensions vector class
+- Vec2: two dimensions vector class
+- Vec3: three dimensions vector class
+
 functions:
-rotate_around_axis: rotate a point around an axis by some angle
-get_distance: returns the distance between two points
-get_angle: returns the angle formed between two vectors
+- rotate_around_axis: rotate a point around an axis by some angle
+- get_distance: returns the distance between two points
+- get_angle: returns the angle formed between two vectors
+- test_box_sphere_intersection: test the intersection between
+  a sphere and a box.
 */
 
 #ifndef GEOMETRY_HPP
@@ -117,6 +121,41 @@ Vec3 rotate_around_axis(Vec3 & v, Vec3 & o, Vec3 & u, double angle){
 	// Wikipedia. https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation
 	Vec3 v2 = o + (v-o) + sin(angle) * (u.cross(v-o)) + (1. -cos(angle))*(u.cross(u.cross(v-o)));
 	return v2;
+	}
+
+bool test_box_sphere_intersection(
+	const Vec3 & box_min_pos,
+	const Vec3 & box_max_pos,
+	const Vec3 & sphere_pos,
+	const double sphere_radius
+	){
+	// Tests whether a sphere, defined by its 
+	// center and radius, intersects with a box,
+	// defined by its min and max corners.
+	// Returns true is applicable, false otherwise.
+	//
+	// Reference:
+	// James Arvo. (1995). A simple method for box-sphere
+	// intersection testing. In Andrew S. Glassner (Ed.),
+	// Graphics gems (1st ed., pp. 335-339). Academic press.
+	// https://doi.org/10.1016/B978-0-08-050753-8.50071-1
+
+	// closest point p to the sphere within the box 	
+	Vec3 p(
+		std::max(box_min_pos.x, std::min(box_max_pos.x, sphere_pos.x)),
+		std::max(box_min_pos.y, std::min(box_max_pos.y, sphere_pos.y)),
+		std::max(box_min_pos.z, std::min(box_max_pos.z, sphere_pos.z))
+		);
+	
+	// squared distance d between the sphere center 
+	// (sphere_pos) and p
+	double sd = 
+		pow(p.x - sphere_pos.x, 2) +
+		pow(p.y - sphere_pos.y, 2) +
+		pow(p.z - sphere_pos.z, 2);
+	
+	// intersection if sd <= sphere_radius^2
+	return sd <= sphere_radius*sphere_radius;
 	}
 
 #endif // GEOMETRY_HPP
