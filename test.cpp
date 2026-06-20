@@ -109,9 +109,27 @@ void test_vec3(){
 	assert(fabs(get_angle(v, w) - M_PI/4)<1e-10);
 	}
 
+void test_test_box_sphere_intersection(){
+	double r = 1.2;
+	Vec3 p0(1, 2, 3); // min corner
+	Vec3 dp(3.1, 7, 1); // extent (strictly positive)
+	Vec3 p1 = p0 + dp; // max corner
+	Vec3 v = p1 - p0; // p0 to p1 vec
+	Vec3 u = v/v.norm(); // unit vec for v
+	Vec3 c1 = p1 + 0.9 * r * u; // center of sphere 1
+	Vec3 c2 = p1 + 1.1 * r * u;	// center of sphere 2
+	Vec3 c3 = p0 - 0.9 * r * u; // center of sphere 3
+	Vec3 c4 = p0 - 1.1 * r * u;	// center of sphere 4
+	assert(test_box_sphere_intersection(p0, p1, c1, r));
+	assert(test_box_sphere_intersection(p0, p1, c2, r) == false);	
+	assert(test_box_sphere_intersection(p0, p1, c3, r));
+	assert(test_box_sphere_intersection(p0, p1, c4, r) == false);
+	}
+
 void test(){
 	test_vec3();
 	test_vec2();
+	test_test_box_sphere_intersection();
 	}
 	
 int main(){
