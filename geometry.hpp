@@ -1,38 +1,38 @@
-/*
-=====================================================================================
-MIT-0 Licence:
--------------------------------------------------------------------------------------
+// ==============================================================================
+// MIT No Attribution
+// 
+// Copyright 2025 Thibault Fillion
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// ==============================================================================
 
-Copyright 2025 Thibault Fillion
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of 
-this software and associated documentation files (the “Software”), to deal in the 
-Software without restriction, including without limitation the rights to use, copy, 
-modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
-and to permit persons to whom the Software is furnished to do so.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-=====================================================================================
-
-Very simple header only include for some basic geometry classes and functions.
-
-classes:
-- Vec2: two dimensions vector class
-- Vec3: three dimensions vector class
-
-functions:
-- rotate_around_axis: rotate a point around an axis by some angle
-- get_distance: returns the distance between two points
-- get_angle: returns the angle formed between two vectors
-- test_box_sphere_intersection: test the intersection between
-  a sphere and a box.
-*/
+// ==============================================================================
+// Very simple header only include for some basic geometry classes and functions.
+// 
+// classes:
+// - Vec2: two dimensions vector class
+// - Vec3: three dimensions vector class
+// 
+// functions:
+// - rotate_around_axis: rotate a point around an axis by some angle
+// - get_distance: returns the distance between two points
+// - get_angle: returns the angle formed between two vectors
+// - test_box_sphere_intersection: test the intersection between
+//   a sphere and a box.
+// ==============================================================================
 
 #ifndef GEOMETRY_HPP
 #define GEOMETRY_HPP
