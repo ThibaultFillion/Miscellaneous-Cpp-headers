@@ -119,7 +119,13 @@ Vec3 rotate_around_axis(Vec3 & v, Vec3 & o, Vec3 & u, double angle){
 	// Adapted from the Wikipedia article: 
 	// Axis-angle representation. (accessed online on the 10th of October 2025). 
 	// Wikipedia. https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation
-	Vec3 v2 = o + (v-o) + sin(angle) * (u.cross(v-o)) + (1. -cos(angle))*(u.cross(u.cross(v-o)));
+
+	// equivalent to:
+	// Vec3 v2 = o + (v-o) + sin(angle) * (u.cross(v-o)) + (1. -cos(angle))*(u.cross(u.cross(v-o)));
+	
+	Vec3 p = u.cross(v-o);
+	Vec3 v2 = v + sin(angle) * p + (1. -cos(angle)) * (u.cross(p));
+
 	return v2;
 	}
 
