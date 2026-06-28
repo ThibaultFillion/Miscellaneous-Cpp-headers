@@ -50,7 +50,7 @@ bool are_abs_close(double a, double b, double abs_tol){
 	// approximate equality. Python Enhancement Proposals.
 	// https://peps.python.org/pep-0485/#defaults
 
-	bool success = abs(a - b) < abs_tol;
+	bool success = std::abs(a - b) < abs_tol;
 	return success;
 	}
 
@@ -62,7 +62,7 @@ bool are_rel_close(double a, double b, double rel_tol=1e-9){
 	// approximate equality. Python Enhancement Proposals.
 	// https://peps.python.org/pep-0485/#defaults
 
-	bool success = abs(a - b) < rel_tol*std::max(abs(a), abs(b));
+	bool success = std::abs(a - b) < rel_tol*std::max(std::abs(a), std::abs(b));
 	return success;
 	}
 
