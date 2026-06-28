@@ -36,8 +36,11 @@
 #ifndef NUMERICS_HPP
 #define NUMERICS_HPP
 
+#include <cmath>
+#include <vector>
 #include <type_traits>
 #include <algorithm>
+#include <numeric>
 
 bool are_abs_close(double a, double b, double abs_tol){
 	// absolute double floating point comparison.
