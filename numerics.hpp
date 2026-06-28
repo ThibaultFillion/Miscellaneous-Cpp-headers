@@ -54,7 +54,7 @@ bool are_abs_close(double a, double b, double abs_tol){
 	return success;
 	}
 
-bool are_rel_close(double a, double b, double rel_tol=1e-9){
+bool are_rel_close(double a, double b, double rel_tol = 1e-9){
 	// relative double floating point comparison.
 	//
 	// Reference:
@@ -62,7 +62,7 @@ bool are_rel_close(double a, double b, double rel_tol=1e-9){
 	// approximate equality. Python Enhancement Proposals.
 	// https://peps.python.org/pep-0485/#defaults
 
-	bool success = std::abs(a - b) < rel_tol*std::max(std::abs(a), std::abs(b));
+	bool success = std::abs(a - b) < rel_tol * std::max(std::abs(a), std::abs(b));
 	return success;
 	}
 
@@ -129,10 +129,10 @@ std::vector<double> make_linscale(double vmin, double vmax, int nval){
 	// vmin to vmax (included) on a linear scale
 	// in a std::vector of double
 	
-	double delta = (vmax - vmin)/(nval - 1);
+	double delta = (vmax - vmin) / (nval - 1);
 	std::vector<double> v(nval);
 	
-	for(int i=0; i<nval; i++){
+	for(int i = 0; i < nval; i++){
 		v[i] = vmin + delta * i;
 		}
 	
@@ -146,10 +146,10 @@ std::vector<double> make_logscale(double vmin, double vmax, int nval){
 	
 	double logvmin = std::log10(vmin);
 	double logvmax = std::log10(vmax);
-	double logdelta = (logvmax - logvmin)/(nval - 1);
+	double logdelta = (logvmax - logvmin) / (nval - 1);
 	std::vector<double> v(nval);
 	
-	for(int i=0; i<nval; i++){
+	for(int i = 0; i < nval; i++){
 		v[i] = std::pow(10, logvmin + logdelta * i);
 		}
 	
