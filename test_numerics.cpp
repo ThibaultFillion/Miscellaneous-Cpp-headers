@@ -23,11 +23,12 @@ void test_are_abs_close(){
 	double b = 16800;
 	double c = 1687;
 	
-	std::vector<bool> results(4);
-	results[0] = not are_abs_close(a, b, 1);
-	results[1] = are_abs_close(a, b, 100);
-	results[2] = not are_abs_close(a, c, 100);
-	results[3] = are_abs_close(a, b, 1e4);
+	std::vector<bool> results = {
+		not are_abs_close(a, b, 1),
+		are_abs_close(a, b, 100),
+		not are_abs_close(a, c, 100),
+		are_abs_close(a, b, 1e4)
+		};
 	
 	assert_results(results);
 	}
@@ -39,15 +40,34 @@ void test_are_rel_close(){
 	double b = 1.00000007;
 	double c = 1.0000000007;
 	
-	std::vector<bool> results(4);
-	results[0] = not are_rel_close(a, b);
-	results[1] = are_rel_close(a, c);
-	results[2] = are_rel_close(a, b, 1e-6);
-	results[3] = not are_rel_close(a, b, 1e-12);
+	std::vector<bool> results = {
+		not are_rel_close(a, b),
+		are_rel_close(a, c),
+		are_rel_close(a, b, 1e-6),
+		not are_rel_close(a, b, 1e-12)
+		};
 	
 	assert_results(results);
 	}
+
+void test_get_sign(){
+	std::cout<<"test_get_sign:"<<std::endl;
 	
+	std::vector<bool> results = {
+		get_sign(1) == 1,
+		get_sign(1.5) == 1,
+		get_sign(-0.1) == -1,
+		get_sign(-10) == -1,
+		get_sign(0) == 1,
+		get_sign(1e79) == 1,
+		get_sign(-1e79) == -1,
+		get_sign(INFINITY) == 1,
+		get_sign(HUGE_VAL) == 1
+		};
+	
+	assert_results(results);	
+	}
+
 void test_compute_sum(){
 	std::cout<<"test_compute_sum:"<<std::endl;
 	
