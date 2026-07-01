@@ -113,7 +113,12 @@ double get_distance(const Vec3 & a, const Vec3 & b){
 	return (a - b).norm();
 	}
 	
-Vec3 rotate_around_axis(Vec3 & v, Vec3 & o, Vec3 & u, double angle){
+Vec3 rotate_around_axis(
+	const Vec3 & v, 
+	const Vec3 & o,
+	const Vec3 & u,
+	double angle
+	){
 	// Rotates the vector v around the axis defined by the 
 	// origin o and the unit vector by the specified angle.
 	// Adapted from the Wikipedia article: 
