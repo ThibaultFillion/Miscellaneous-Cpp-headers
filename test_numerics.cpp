@@ -9,7 +9,7 @@
 #include "numerics.hpp"
 
 void assert_results(const std::vector<bool> & results){
-	for(size_t i=0; i<results.size(); i++){
+	for(size_t i = 0; i < results.size(); i++){
 		std::string msg = results[i] ? "success" : "fail";
 		std::cout<<"\tcase "<<i<<": "<<msg<<std::endl;
 		assert(results[i]);
@@ -92,15 +92,15 @@ void test_compute_sum(){
 	int      sum9 = compute_sum(v9);
 	
 	std::vector<bool> results {
-		sum1==3,
-		sum2==3,
+		sum1 == 3,
+		sum2 == 3,
 		are_rel_close(sum3, 3),
 		are_rel_close(sum4, 3),
 		are_rel_close(sum5.x, 3) and are_rel_close(sum5.y, 5),
 		are_rel_close(sum6.x, 3) and are_rel_close(sum6.y, 5) and are_rel_close(sum6.z, 7),
 		are_rel_close(sum7, 3),
 		are_rel_close(sum8, 3),
-		sum9==3
+		sum9 == 3
 		};
 	
 	assert_results(results);
@@ -235,6 +235,7 @@ void test_make_logscale(){
 int main(){
 	test_are_abs_close();
 	test_are_rel_close();
+	test_get_sign();
 	test_compute_sum();
 	test_compute_average();
 	test_compute_stdev();
