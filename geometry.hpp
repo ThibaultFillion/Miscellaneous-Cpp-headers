@@ -25,6 +25,7 @@
 // classes:
 // - Vec2: two dimensions vector class
 // - Vec3: three dimensions vector class
+// - SphericalCoordinates: POD for spherical coordinates
 // 
 // functions:
 // - rotate_around_axis: rotate a point around an axis by some angle
@@ -32,6 +33,8 @@
 // - get_angle: returns the angle formed between two vectors
 // - test_box_sphere_intersection: test the intersection between
 //   a sphere and a box.
+// - spherical_to_cartesian: spherical to Cartesian coordinates conversion
+// - cartesian_to_spherical: Cartesian to spherical coordinates conversion
 // ==============================================================================
 
 #ifndef GEOMETRY_HPP
@@ -167,6 +170,61 @@ bool test_box_sphere_intersection(
 	
 	// intersection if sd <= sphere_radius^2
 	return sd <= sphere_radius*sphere_radius;
+	}
+
+struct SphericalCoordinates{
+	double phi;
+	double theta;
+	double r;
+	};
+
+Vec3 spherical_to_cartesian(const SphericalCoordinates & c){
+	// converts spherical coordinates (SphericalCoordinates)
+	// into Cartesian coordinates (Vec3)
+	//
+	// adapted from:
+	// Spherical coordinate system. Wikipedia.
+	// accessed online: 1st of july, 2026.
+	// https://en.wikipedia.org/wiki/Spherical_coordinate_system
+	
+	Vec3 v(
+		c.r * std::sin(c.theta) * std::cos(c.phi),
+		c.r * std::sin(c.theta) * std::sin(c.phi),
+		c.r * std::cos(c.theta)
+		);
+	
+	return v;
+	}
+
+SphericalCoordinates cartesian_to_spherical(const Vec3 & v){
+	// converts Cartesian coordinates (Vec3)
+	// into spherical coordinates (SphericalCoordinates)
+	//
+	// adapted from:
+	// Spherical coordinate system. Wikipedia.
+	// accessed online: 1st of july, 2026.
+	// https://en.wikipedia.org/wiki/Spherical_coordinate_system
+	
+	double norm = v.norm();
+	double norm_xy = std::sqrt(v.x * v.x + v.y * v.y);
+	int y_sign = -1 + (v.y >= 0) * 2;
+	
+	if(norm == 0){
+		return {0, 0, 0};
+		}
+
+	SphericalCoordinates c;
+	c.r = norm;	
+	c.theta = std::acos(v.z / c.r);
+	
+	if(norm_xy == 0){
+		c.phi = 0;
+		}
+	else{
+		c.phi = y_sign * std::acos(v.x / norm_xy);
+		}
+	
+	return c;
 	}
 
 #endif // GEOMETRY_HPP
