@@ -66,6 +66,16 @@ bool are_rel_close(double a, double b, double rel_tol = 1e-9){
 	return success;
 	}
 
+template <typename T>
+int get_sign(const T & val){
+	// returns the sign of an integer:
+	//   1 if val>=0
+	//  -1 otherwise
+	
+	int sign = -1 + (val >= 0) * 2;
+	return sign;
+	}
+
 template <typename T_container>
 auto compute_sum(const T_container & container){
 	// returns the sum of the elements inside the container.
