@@ -25,6 +25,7 @@
 // functions:
 // - are_abs_close: compare double floating point (absolute tolerance) 
 // - are_rel_close: compare double floating point (relative tolerance)
+// - get_sign: returns the sign of a number
 // - compute_sum: sum elements of a container
 // - compute_average: average elements of a container
 // - compute_stdev: compute standard deviation for elements of a container
