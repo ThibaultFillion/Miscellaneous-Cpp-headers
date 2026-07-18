@@ -106,7 +106,7 @@ class RandomNumberGenerator{
 
 // generates a sequence of RNG seeds
 
-std::vector<uint_fast32_t> generate_rand_seed_seq(int seq_size, uint_fast32_t seed){
+inline std::vector<uint_fast32_t> generate_rand_seed_seq(int seq_size, uint_fast32_t seed){
 	std::mt19937 rng(seed);
 	std::vector<uint_fast32_t> seed_seq(seq_size);
 	for(int i = 0; i < seq_size; i++){
