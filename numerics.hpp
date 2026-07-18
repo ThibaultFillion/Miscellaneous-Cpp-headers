@@ -47,7 +47,7 @@ inline bool are_abs_close(double a, double b, double abs_tol){
 	// absolute double floating point comparison.
 	//  
 	// Reference:
-	// Chrispopher Barker. (2015). PEP 485 - A function for testing
+	// Christopher Barker. (2015). PEP 485 - A function for testing
 	// approximate equality. Python Enhancement Proposals.
 	// https://peps.python.org/pep-0485/#defaults
 
@@ -59,7 +59,7 @@ inline bool are_rel_close(double a, double b, double rel_tol = 1e-9){
 	// relative double floating point comparison.
 	//
 	// Reference:
-	// Chrispopher Barker. (2015). PEP 485 - A function for testing
+	// Christopher Barker. (2015). PEP 485 - A function for testing
 	// approximate equality. Python Enhancement Proposals.
 	// https://peps.python.org/pep-0485/#defaults
 
