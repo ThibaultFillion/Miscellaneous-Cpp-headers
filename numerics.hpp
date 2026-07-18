@@ -43,7 +43,7 @@
 #include <algorithm>
 #include <numeric>
 
-bool are_abs_close(double a, double b, double abs_tol){
+inline bool are_abs_close(double a, double b, double abs_tol){
 	// absolute double floating point comparison.
 	//  
 	// Reference:
@@ -55,7 +55,7 @@ bool are_abs_close(double a, double b, double abs_tol){
 	return success;
 	}
 
-bool are_rel_close(double a, double b, double rel_tol = 1e-9){
+inline bool are_rel_close(double a, double b, double rel_tol = 1e-9){
 	// relative double floating point comparison.
 	//
 	// Reference:
@@ -135,7 +135,7 @@ auto compute_stdev(const T_container & container){
 	return stdev;
 	}
 	
-std::vector<double> make_linscale(double vmin, double vmax, int nval){
+inline std::vector<double> make_linscale(double vmin, double vmax, int nval){
 	// generates a range of nval values from
 	// vmin to vmax (included) on a linear scale
 	// in a std::vector of double
@@ -150,7 +150,7 @@ std::vector<double> make_linscale(double vmin, double vmax, int nval){
 	return v;
 	}
 
-std::vector<double> make_logscale(double vmin, double vmax, int nval){
+inline std::vector<double> make_logscale(double vmin, double vmax, int nval){
 	// generates a range of nval values from
 	// vmin to vmax (included) on a log10 scale
 	// in a std::vector of double
