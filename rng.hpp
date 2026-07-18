@@ -97,7 +97,7 @@ class RandomNumberGenerator{
 			for(size_t i = 0; i < weights.size(); i++){
 				cumul += weights[i];
 				if(cumul >= r){
-					return i;
+					return static_cast<int>(i);
 					}
 				}
 			return static_cast<int>(weights.size()-1);
