@@ -215,13 +215,13 @@ inline SphericalCoordinates cartesian_to_spherical(const Vec3 & v){
 
 	SphericalCoordinates c;
 	c.r = norm;	
-	c.theta = std::acos(v.z / c.r);
+	c.theta = std::acos(std::max(-1., std::min(1., v.z / c.r)));
 	
 	if(norm_xy == 0){
 		c.phi = 0;
 		}
 	else{
-		c.phi = y_sign * std::acos(v.x / norm_xy);
+		c.phi = y_sign * std::acos(std::max(-1., std::min(1., v.x / norm_xy)));
 		}
 	
 	return c;
