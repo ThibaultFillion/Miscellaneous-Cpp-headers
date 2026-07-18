@@ -37,6 +37,7 @@
 
 #include<random>
 #include<vector>
+#include<limits>
 
 class RandomNumberGenerator{
 	private:
@@ -47,12 +48,14 @@ class RandomNumberGenerator{
 	public:
 		RandomNumberGenerator(uint_fast32_t seed=0):
 			rng(seed),
+			int_dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max()),
 			unit_dist(0, 1){
 			}
 
 		int rand_int(){
 			
-			// draws random integer
+			// draws random int integer in
+			// [minimum int, maximum int]
 			
 			return int_dist(rng);
 			}
