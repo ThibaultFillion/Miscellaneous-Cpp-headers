@@ -38,6 +38,7 @@
 #include<random>
 #include<vector>
 #include<limits>
+#include<numeric>
 
 class RandomNumberGenerator{
 	private:
@@ -93,7 +94,7 @@ class RandomNumberGenerator{
 			
 			double r = unit_rand()*total;
 			double cumul = 0;
-			for(size_t i = 0; i < weights.size(); i++){
+			for(size_t i = 0; i<weights.size(); i++){
 				cumul += weights[i];
 				if(cumul >= r){
 					return i;
