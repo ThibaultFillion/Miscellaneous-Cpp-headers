@@ -390,7 +390,7 @@ class PhysicalUnitsParser{
 				{"uPa", {micro, Unit::Pascal}},
 				{"µPa", {micro, Unit::Pascal}},
 				{"mPa", {milli, Unit::Pascal}},
-				{"N",   {uni, Unit::Pascal}},
+				{"Pa",  {uni, Unit::Pascal}},
 				{"kPa", {kilo, Unit::Pascal}},
 				};
 			}
