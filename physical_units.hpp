@@ -32,6 +32,7 @@
 #ifndef PHYSICAL_UNITS_HPP
 #define PHYSICAL_UNITS_HPP
 
+#include <array>
 #include <string_view>
 #include <map>
 #include <cmath>
@@ -50,15 +51,15 @@ class PhysicalUnitsParser{
 	
 		PhysicalUnits output;
 		
-		inline static const double femto = 1e-15;
-		inline static const double pico  = 1e-12;
-		inline static const double nano  = 1e-9;
-		inline static const double micro = 1e-6;
-		inline static const double milli = 1e-3;
-		inline static const double centi = 1e-2;
-		inline static const double deci  = 1e-1;
-		inline static const double uni   = 1e0;
-		inline static const double kilo  = 1e3;
+		inline static constexpr double femto = 1e-15;
+		inline static constexpr double pico  = 1e-12;
+		inline static constexpr double nano  = 1e-9;
+		inline static constexpr double micro = 1e-6;
+		inline static constexpr double milli = 1e-3;
+		inline static constexpr double centi = 1e-2;
+		inline static constexpr double deci  = 1e-1;
+		inline static constexpr double uni   = 1e0;
+		inline static constexpr double kilo  = 1e3;
 
 		enum class Unit{
 			Meter,
@@ -74,7 +75,154 @@ class PhysicalUnitsParser{
 			Pascal
 			};
 
-		static const std::map<std::string, std::pair<double, Unit>> unit_dict;		
+		struct PrefixedUnit{
+			double prefix_factor;
+			Unit unit;
+			};
+			
+		struct UnitKVPair{
+			std::string_view key;
+			PrefixedUnit value;
+			};
+			
+		static constexpr std::array<UnitKVPair, 111> unit_dict = {{
+			// meter
+			{"fm", {femto, Unit::Meter}},
+			{"pm", {pico, Unit::Meter}},
+			{"nm", {nano, Unit::Meter}},
+			{"um", {micro, Unit::Meter}},
+			{"µm", {micro, Unit::Meter}},
+			{"mm", {milli, Unit::Meter}},
+			{"cm", {centi, Unit::Meter}},
+			{"dm", {deci, Unit::Meter}},
+			{"m",  {uni, Unit::Meter}},
+			{"km", {kilo, Unit::Meter}},
+
+			// liter (with uppercase L)
+			{"fL", {femto, Unit::Liter}},
+			{"pL", {pico, Unit::Liter}},
+			{"nL", {nano, Unit::Liter}},
+			{"uL", {micro, Unit::Liter}},
+			{"µL", {micro, Unit::Liter}},
+			{"mL", {milli, Unit::Liter}},
+			{"cL", {centi, Unit::Liter}},
+			{"dL", {deci, Unit::Liter}},
+			{"L",  {uni, Unit::Liter}},
+			{"kL", {kilo, Unit::Liter}},
+			
+			// liter (with lowercase L)
+			{"fl", {femto, Unit::Liter}},
+			{"pl", {pico, Unit::Liter}},
+			{"nl", {nano, Unit::Liter}},
+			{"ul", {micro, Unit::Liter}},
+			{"µl", {micro, Unit::Liter}},
+			{"ml", {milli, Unit::Liter}},
+			{"cl", {centi, Unit::Liter}},
+			{"dl", {deci, Unit::Liter}},
+			{"l",  {uni, Unit::Liter}},
+			{"kl", {kilo, Unit::Liter}},
+
+			// molar
+			{"fM", {femto, Unit::Molar}},
+			{"pM", {pico, Unit::Molar}},
+			{"nM", {nano, Unit::Molar}},
+			{"uM", {micro, Unit::Molar}},
+			{"µM", {micro, Unit::Molar}},
+			{"mM", {milli, Unit::Molar}},
+			{"cM", {centi, Unit::Molar}},
+			{"dM", {deci, Unit::Molar}},
+			{"M",  {uni, Unit::Molar}},
+			{"kM", {kilo, Unit::Molar}},
+
+			// mole
+			{"fmol", {femto, Unit::Mole}},
+			{"pmol", {pico, Unit::Mole}},
+			{"nmol", {nano, Unit::Mole}},
+			{"umol", {micro, Unit::Mole}},
+			{"µmol", {micro, Unit::Mole}},
+			{"mmol", {milli, Unit::Mole}},
+			{"cmol", {centi, Unit::Mole}},
+			{"dmol", {deci, Unit::Mole}},
+			{"mol",  {uni, Unit::Mole}},
+			{"kmol", {kilo, Unit::Mole}},
+
+			// gram
+			{"fg", {femto, Unit::Gram}},
+			{"pg", {pico, Unit::Gram}},
+			{"ng", {nano, Unit::Gram}},
+			{"ug", {micro, Unit::Gram}},
+			{"µg", {micro, Unit::Gram}},
+			{"mg", {milli, Unit::Gram}},
+			{"cg", {centi, Unit::Gram}},
+			{"dg", {deci, Unit::Gram}},
+			{"g",  {uni, Unit::Gram}},
+			{"kg", {kilo, Unit::Gram}},
+
+			// second
+			{"fs", {femto, Unit::Second}},
+			{"ps", {pico, Unit::Second}},
+			{"ns", {nano, Unit::Second}},
+			{"us", {micro, Unit::Second}},
+			{"µs", {micro, Unit::Second}},
+			{"ms", {milli, Unit::Second}},
+			{"s",  {uni, Unit::Second}},
+			{"ks", {kilo, Unit::Second}},
+
+			{"min", {60.0, Unit::Second}},
+			{"h",   {3600.0, Unit::Second}},
+			{"day", {86400.0, Unit::Second}},
+
+			// kelvin
+			{"fK", {femto, Unit::Kelvin}},
+			{"pK", {pico, Unit::Kelvin}},
+			{"nK", {nano, Unit::Kelvin}},
+			{"uK", {micro, Unit::Kelvin}},
+			{"µK", {micro, Unit::Kelvin}},
+			{"mK", {milli, Unit::Kelvin}},
+			{"K",  {uni, Unit::Kelvin}},
+			{"kK", {kilo, Unit::Kelvin}},
+
+			// joule
+			{"fJ", {femto, Unit::Joule}},
+			{"pJ", {pico, Unit::Joule}},
+			{"nJ", {nano, Unit::Joule}},
+			{"uJ", {micro, Unit::Joule}},
+			{"µJ", {micro, Unit::Joule}},
+			{"mJ", {milli, Unit::Joule}},
+			{"J",  {uni, Unit::Joule}},
+			{"kJ", {kilo, Unit::Joule}},
+
+			//watt
+			{"fW", {femto, Unit::Watt}},
+			{"pW", {pico, Unit::Watt}},
+			{"nW", {nano, Unit::Watt}},
+			{"uW", {micro, Unit::Watt}},
+			{"µW", {micro, Unit::Watt}},
+			{"mW", {milli, Unit::Watt}},
+			{"W",  {uni, Unit::Watt}},
+			{"kW", {kilo, Unit::Watt}},
+
+			//newton
+			{"fN", {femto, Unit::Newton}},
+			{"pN", {pico, Unit::Newton}},
+			{"nN", {nano, Unit::Newton}},
+			{"uN", {micro, Unit::Newton}},
+			{"µN", {micro, Unit::Newton}},
+			{"mN", {milli, Unit::Newton}},
+			{"N",  {uni, Unit::Newton}},
+			{"kN", {kilo, Unit::Newton}},
+
+			//pascal
+			{"fPa", {femto, Unit::Pascal}},
+			{"pPa", {pico, Unit::Pascal}},
+			{"nPa", {nano, Unit::Pascal}},
+			{"uPa", {micro, Unit::Pascal}},
+			{"µPa", {micro, Unit::Pascal}},
+			{"mPa", {milli, Unit::Pascal}},
+			{"Pa",  {uni, Unit::Pascal}},
+			{"kPa", {kilo, Unit::Pascal}}
+			}};
+		
 		std::string_view src;
 		size_t next_block_start;
 		size_t block_start;
@@ -82,6 +230,16 @@ class PhysicalUnitsParser{
 		bool invert_block;
 		bool invert_next_block;
 		bool last_block;
+		
+		const PrefixedUnit & lookup_prefixed_unit(const std::string_view & key){
+			for(auto & kv_pair: unit_dict){
+				if(kv_pair.key == key){
+					return kv_pair.value;
+					}
+				}
+			throw std::logic_error("undefined unit symbol \"" + std::string(key) + "\"");
+			return unit_dict[0].value;				
+			}
 		
 		std::string_view strip_whitespace(const std::string_view & str){
 			
@@ -123,24 +281,19 @@ class PhysicalUnitsParser{
 			}
 		
 		void register_block(const std::string_view & symbol, int exponent){
-			auto pair = unit_dict.find(std::string(symbol));
 			
-			if(pair == unit_dict.end()){
-				throw std::logic_error("undefined unit symbol \"" + std::string(symbol) + "\"");
-				}
+			const PrefixedUnit & pf_unit = lookup_prefixed_unit(symbol);
 			
-			const std::pair<double, Unit> & entry = pair->second;
-			
-			switch(entry.second){
+			switch(pf_unit.unit){
 				case Unit::Meter:{
 					output.m += exponent;
-					output.factor *= std::pow(entry.first, exponent);
+					output.factor *= std::pow(pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Liter:{
 					// liter = (0.1m)^3
 					output.m += 3*exponent;
-					output.factor *= std::pow(1e-1*pow(entry.first, 1.0/3.0), 3*exponent);
+					output.factor *= std::pow(1e-1*pow(pf_unit.prefix_factor, 1.0/3.0), 3*exponent);
 					break;
 					}
 				case Unit::Joule:{
@@ -148,7 +301,7 @@ class PhysicalUnitsParser{
 					output.m += 2*exponent;
 					output.g += exponent;
 					output.s -= 2*exponent;
-					output.factor *= std::pow(kilo*entry.first, exponent);
+					output.factor *= std::pow(kilo*pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Watt:{
@@ -156,19 +309,19 @@ class PhysicalUnitsParser{
 					output.m += 2*exponent;
 					output.g += exponent;
 					output.s -= 3*exponent;
-					output.factor *= std::pow(kilo*entry.first, exponent);
+					output.factor *= std::pow(kilo*pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Mole:{
 					output.mol += exponent;
-					output.factor *= std::pow(entry.first, exponent);
+					output.factor *= std::pow(pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Molar:{
 					// molar = (mol/L)
 					// mol
 					output.mol += exponent;
-					output.factor *= std::pow(entry.first, exponent);
+					output.factor *= std::pow(pf_unit.prefix_factor, exponent);
 					// 1/L
 					output.m -= 3*exponent;
 					output.factor /= std::pow(1e-1*pow(1.0, 1.0/3.0), 3*exponent);
@@ -176,12 +329,12 @@ class PhysicalUnitsParser{
 					}
 				case Unit::Second:{
 					output.s += exponent;
-					output.factor *= std::pow(entry.first, exponent);
+					output.factor *= std::pow(pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Kelvin:{
 					output.K += exponent;
-					output.factor *= std::pow(entry.first, exponent);
+					output.factor *= std::pow(pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Newton:{
@@ -189,12 +342,12 @@ class PhysicalUnitsParser{
 					output.m += exponent;
 					output.g += exponent;
 					output.s -= 2*exponent;
-					output.factor *= std::pow(kilo*entry.first, exponent);
+					output.factor *= std::pow(kilo*pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Gram:{
 					output.g += exponent;
-					output.factor *= std::pow(entry.first, exponent);
+					output.factor *= std::pow(pf_unit.prefix_factor, exponent);
 					break;
 					}
 				case Unit::Pascal:{
@@ -202,7 +355,7 @@ class PhysicalUnitsParser{
 					output.m -= exponent;
 					output.g += exponent;
 					output.s -= 2*exponent;
-					output.factor *= std::pow(kilo*entry.first, exponent);
+					output.factor *= std::pow(kilo*pf_unit.prefix_factor, exponent);
 					break;					
 					}
 				};
@@ -252,150 +405,9 @@ class PhysicalUnitsParser{
 			register_block(symbol, exponent);
 			}
 		
-		static std::map<std::string, std::pair<double, Unit>> create_unit_dict(){
-			return {
-				// meter
-				{"fm", {femto, Unit::Meter}},
-				{"pm", {pico, Unit::Meter}},
-				{"nm", {nano, Unit::Meter}},
-				{"um", {micro, Unit::Meter}},
-				{"µm", {micro, Unit::Meter}},
-				{"mm", {milli, Unit::Meter}},
-				{"cm", {centi, Unit::Meter}},
-				{"dm", {deci, Unit::Meter}},
-				{"m",  {uni, Unit::Meter}},
-				{"km", {kilo, Unit::Meter}},
-
-				// liter (with uppercase L)
-				{"fL", {femto, Unit::Liter}},
-				{"pL", {pico, Unit::Liter}},
-				{"nL", {nano, Unit::Liter}},
-				{"uL", {micro, Unit::Liter}},
-				{"µL", {micro, Unit::Liter}},
-				{"mL", {milli, Unit::Liter}},
-				{"cL", {centi, Unit::Liter}},
-				{"dL", {deci, Unit::Liter}},
-				{"L",  {uni, Unit::Liter}},
-				{"kL", {kilo, Unit::Liter}},
-				
-				// liter (with lowercase L)
-				{"fl", {femto, Unit::Liter}},
-				{"pl", {pico, Unit::Liter}},
-				{"nl", {nano, Unit::Liter}},
-				{"ul", {micro, Unit::Liter}},
-				{"µl", {micro, Unit::Liter}},
-				{"ml", {milli, Unit::Liter}},
-				{"cl", {centi, Unit::Liter}},
-				{"dl", {deci, Unit::Liter}},
-				{"l",  {uni, Unit::Liter}},
-				{"kl", {kilo, Unit::Liter}},
-
-				// molar
-				{"fM", {femto, Unit::Molar}},
-				{"pM", {pico, Unit::Molar}},
-				{"nM", {nano, Unit::Molar}},
-				{"uM", {micro, Unit::Molar}},
-				{"µM", {micro, Unit::Molar}},
-				{"mM", {milli, Unit::Molar}},
-				{"cM", {centi, Unit::Molar}},
-				{"dM", {deci, Unit::Molar}},
-				{"M",  {uni, Unit::Molar}},
-				{"kM", {kilo, Unit::Molar}},
-
-				// mole
-				{"fmol", {femto, Unit::Mole}},
-				{"pmol", {pico, Unit::Mole}},
-				{"nmol", {nano, Unit::Mole}},
-				{"umol", {micro, Unit::Mole}},
-				{"µmol", {micro, Unit::Mole}},
-				{"mmol", {milli, Unit::Mole}},
-				{"cmol", {centi, Unit::Mole}},
-				{"dmol", {deci, Unit::Mole}},
-				{"mol",  {uni, Unit::Mole}},
-				{"kmol", {kilo, Unit::Mole}},
-
-				// gram
-				{"fg", {femto, Unit::Gram}},
-				{"pg", {pico, Unit::Gram}},
-				{"ng", {nano, Unit::Gram}},
-				{"ug", {micro, Unit::Gram}},
-				{"µg", {micro, Unit::Gram}},
-				{"mg", {milli, Unit::Gram}},
-				{"cg", {centi, Unit::Gram}},
-				{"dg", {deci, Unit::Gram}},
-				{"g",  {uni, Unit::Gram}},
-				{"kg", {kilo, Unit::Gram}},
-
-				// second
-				{"fs", {femto, Unit::Second}},
-				{"ps", {pico, Unit::Second}},
-				{"ns", {nano, Unit::Second}},
-				{"us", {micro, Unit::Second}},
-				{"µs", {micro, Unit::Second}},
-				{"ms", {milli, Unit::Second}},
-				{"s",  {uni, Unit::Second}},
-				{"ks", {kilo, Unit::Second}},
-
-				{"min", {60.0, Unit::Second}},
-				{"h",   {3600.0, Unit::Second}},
-				{"day", {86400.0, Unit::Second}},
-
-				// kelvin
-				{"fK", {femto, Unit::Kelvin}},
-				{"pK", {pico, Unit::Kelvin}},
-				{"nK", {nano, Unit::Kelvin}},
-				{"uK", {micro, Unit::Kelvin}},
-				{"µK", {micro, Unit::Kelvin}},
-				{"mK", {milli, Unit::Kelvin}},
-				{"K",  {uni, Unit::Kelvin}},
-				{"kK", {kilo, Unit::Kelvin}},
-
-				// joule
-				{"fJ", {femto, Unit::Joule}},
-				{"pJ", {pico, Unit::Joule}},
-				{"nJ", {nano, Unit::Joule}},
-				{"uJ", {micro, Unit::Joule}},
-				{"µJ", {micro, Unit::Joule}},
-				{"mJ", {milli, Unit::Joule}},
-				{"J",  {uni, Unit::Joule}},
-				{"kJ", {kilo, Unit::Joule}},
-
-				//watt
-				{"fW", {femto, Unit::Watt}},
-				{"pW", {pico, Unit::Watt}},
-				{"nW", {nano, Unit::Watt}},
-				{"uW", {micro, Unit::Watt}},
-				{"µW", {micro, Unit::Watt}},
-				{"mW", {milli, Unit::Watt}},
-				{"W",  {uni, Unit::Watt}},
-				{"kW", {kilo, Unit::Watt}},
-
-				//newton
-				{"fN", {femto, Unit::Newton}},
-				{"pN", {pico, Unit::Newton}},
-				{"nN", {nano, Unit::Newton}},
-				{"uN", {micro, Unit::Newton}},
-				{"µN", {micro, Unit::Newton}},
-				{"mN", {milli, Unit::Newton}},
-				{"N",  {uni, Unit::Newton}},
-				{"kN", {kilo, Unit::Newton}},
-
-				//pascal
-				{"fPa", {femto, Unit::Pascal}},
-				{"pPa", {pico, Unit::Pascal}},
-				{"nPa", {nano, Unit::Pascal}},
-				{"uPa", {micro, Unit::Pascal}},
-				{"µPa", {micro, Unit::Pascal}},
-				{"mPa", {milli, Unit::Pascal}},
-				{"Pa",  {uni, Unit::Pascal}},
-				{"kPa", {kilo, Unit::Pascal}},
-				};
-			}
-			
 	public:
 		
 		PhysicalUnitsParser(const std::string & src): src(src){
-			
 			output.s   = 0;
 			output.mol = 0;
 			output.m   = 0;
@@ -423,8 +435,6 @@ class PhysicalUnitsParser{
 			return output;
 			}
 	};
-
-const std::map<std::string, std::pair<double, PhysicalUnitsParser::Unit>> PhysicalUnitsParser::unit_dict = PhysicalUnitsParser::create_unit_dict();
 
 inline PhysicalUnits parse_physical_units(const std::string & src){	
 	PhysicalUnitsParser parser(src);
